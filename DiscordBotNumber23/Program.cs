@@ -1,6 +1,18 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using Microsoft.Extensions.Hosting;
+using NetCord;
+using NetCord.Hosting.Gateway;
+using NetCord.Hosting.Services.ApplicationCommands;
+using DiscordBotNumber23.SlashCommands;
+using NetCord.Hosting.Services;
 
-app.MapGet("/", () => "Hello World!");
+var builder = Host.CreateApplicationBuilder(args);
 
-app.Run();
+builder.Services
+    .AddDiscordGateway()
+    .AddApplicationCommands();
+
+var host = builder.Build();
+
+host.AddModules(typeof(SlashCommands).Assembly);
+
+await host.RunAsync();
