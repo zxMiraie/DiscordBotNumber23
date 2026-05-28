@@ -14,16 +14,18 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="CatBox.NET" Version="1.1.0" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="11.0.0-preview.4.26230.115" />
       <PackageReference Include="NetCord" Version="1.0.0-alpha.490" />
       <PackageReference Include="NetCord.Hosting" Version="1.0.0-alpha.490" />
       <PackageReference Include="NetCord.Hosting.Services" Version="1.0.0-alpha.490" />
       <PackageReference Include="NetCord.Services" Version="1.0.0-alpha.490" />
+      <PackageReference Include="YoutubeExplode" Version="6.6.0" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="EventHandlers\" />
-      <Folder Include="Services\" />
+      <Folder Include="temp\" />
     </ItemGroup>
 
 </Project>
