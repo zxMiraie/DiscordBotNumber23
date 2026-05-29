@@ -3,15 +3,18 @@ using YoutubeExplode.Videos.Streams;
 
 namespace DiscordBotNumber23.Services;
 
-public class YtDownloader
+public class YtDownloader(ILogger<YtDownloader> logger)
 {
     private readonly YoutubeClient _client = new();
 
     public async Task<string?> DownloadVideo(string url)
     {
         if (string.IsNullOrWhiteSpace(url))
-            throw new ArgumentException("Video url must be provided.", nameof(url));
-
+        {
+           logger.LogError("You must provide a video url");
+           throw new ArgumentException("You must provide a video url");
+        }
+            
         Directory.CreateDirectory("temp");
 
         var video = await _client.Videos.GetAsync(url);
@@ -21,12 +24,14 @@ public class YtDownloader
             .GetWithHighestVideoQuality();
 
         if (streamInfo is null)
+        {
+            logger.LogError("Could not find video stream");
             throw new InvalidOperationException("No downloadable streams found for this video.");
-
+        }
+            
         var filePath = Path.Combine("temp", $"{video.Id}.mp4"); 
-
         await _client.Videos.Streams.DownloadAsync(streamInfo, filePath);
-        
+        logger.LogInformation($"Downloaded {video.Id} to {filePath}");
         return filePath;
     }
 }

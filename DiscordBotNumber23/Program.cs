@@ -1,5 +1,4 @@
 using DiscordBotNumber23.Commands.SlashCommands;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NetCord;
 using NetCord.Hosting.Gateway;
@@ -28,10 +27,14 @@ builder.Services
     .AddDiscordGateway(options => 
         options.Intents = GatewayIntents.AllNonPrivileged | GatewayIntents.MessageContent)
     .AddApplicationCommands()
-    .AddCommands(options => options.Prefix = "!");
+    .AddCommands();
 
 var host = builder.Build();
 
+var client = host.Services.GetRequiredService<GatewayClient>();
+
 host.AddModules(typeof(Program).Assembly);
+
+Console.WriteLine($"Hello World! Bot Id {client.Id}");
 
 await host.RunAsync();
