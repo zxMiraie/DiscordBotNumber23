@@ -40,7 +40,7 @@ public class TextCommands(YtDownloader ytDownloader) : CommandModule<CommandCont
 
         var filePath = await ytDownloader.DownloadVideo(url);
 
-        if (filePath == null)
+        if (filePath == null) 
         {
             await message.ModifyAsync(x => x.Content = "Couldn't download video");
             return;
