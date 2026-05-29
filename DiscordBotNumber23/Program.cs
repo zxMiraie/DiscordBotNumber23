@@ -7,6 +7,7 @@ using NetCord.Hosting.Services;
 using NetCord.Hosting.Services.Commands;
 using DiscordBotNumber23.Commands.TextCommands;
 using DiscordBotNumber23.Services;
+using Microsoft.Extensions.DependencyInjection;
 using NetCord.Gateway;
 
 
